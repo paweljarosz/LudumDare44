@@ -1,0 +1,23 @@
+go.property("fade", vmath.vector4())
+
+--global
+FADER = nil
+
+function init(self)
+	FADER = msg.url()
+	self.fade = vmath.vector4(1)	--white
+	sprite.set_constant("#sprite", "tint", self.fade)
+	--msg.post("#", "start")
+end
+
+function update(self, dt)
+	sprite.set_constant("#sprite", "tint", self.fade)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("start") then 
+		go.animate("#", "fade", go.PLAYBACK_ONCE_FORWARD, vmath.vector4(0), go.EASING_INOUTSINE, 1.5)
+	elseif message_id == hash("end") then 
+		go.animate("#", "fade", go.PLAYBACK_ONCE_FORWARD, vmath.vector4(1), go.EASING_INOUTSINE, 1.5)
+	end
+end

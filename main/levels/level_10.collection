@@ -1,11 +1,11 @@
-name: "level_1"
+name: "level_10"
 instances {
   id: "hero"
   prototype: "/main/objects/hero.go"
   children: "boost"
   position {
-    x: 309.0
-    y: 342.0
+    x: 457.0
+    y: 414.0
     z: 0.0
   }
   rotation {
@@ -64,8 +64,8 @@ instances {
   id: "checkpoint"
   prototype: "/main/objects/checkpoint.go"
   position {
-    x: 465.0
-    y: 444.0
+    x: 578.0
+    y: 254.0
     z: 0.0
   }
   rotation {
@@ -80,12 +80,172 @@ instances {
     z: 1.0
   }
 }
+instances {
+  id: "object2"
+  prototype: "/main/objects/object.go"
+  position {
+    x: 368.0
+    y: 261.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.008001721
+    z: 0.0
+    w: 0.999968
+  }
+  component_properties {
+    id: "object"
+    properties {
+      id: "state"
+      value: "NONE"
+      type: PROPERTY_TYPE_HASH
+    }
+    properties {
+      id: "scale"
+      value: "15.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "trigger"
+  prototype: "/main/objects/trigger.go"
+  position {
+    x: 495.0
+    y: 354.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "trigger"
+    properties {
+      id: "triggered_by"
+      value: "YELLOW"
+      type: PROPERTY_TYPE_HASH
+    }
+    properties {
+      id: "triggers"
+      value: "doors"
+      type: PROPERTY_TYPE_URL
+    }
+  }
+  scale3 {
+    x: 20.0
+    y: 20.0
+    z: 1.0
+  }
+}
+instances {
+  id: "doors"
+  prototype: "/main/objects/doors.go"
+  position {
+    x: 337.0
+    y: 334.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "doors"
+    properties {
+      id: "color"
+      value: "YELLOW"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+  scale3 {
+    x: 48.0
+    y: 16.0
+    z: 1.0
+  }
+}
+instances {
+  id: "object"
+  prototype: "/main/objects/object.go"
+  position {
+    x: 391.0
+    y: 420.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "object"
+    properties {
+      id: "state"
+      value: "YELLOW"
+      type: PROPERTY_TYPE_HASH
+    }
+    properties {
+      id: "scale"
+      value: "15.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "object1"
+  prototype: "/main/objects/object.go"
+  position {
+    x: 338.0
+    y: 389.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "object"
+    properties {
+      id: "state"
+      value: "GREEN"
+      type: PROPERTY_TYPE_HASH
+    }
+    properties {
+      id: "scale"
+      value: "20.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "tilemap"
   data: "components {\n"
-  "  id: \"level_1\"\n"
-  "  component: \"/main/levels/level_1.tilemap\"\n"
+  "  id: \"level_2\"\n"
+  "  component: \"/main/levels/level_2.tilemap\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"
@@ -101,7 +261,7 @@ embedded_instances {
   "embedded_components {\n"
   "  id: \"collisionobject\"\n"
   "  type: \"collisionobject\"\n"
-  "  data: \"collision_shape: \\\"/main/levels/level_1.tilemap\\\"\\n"
+  "  data: \"collision_shape: \\\"/main/levels/level_2.tilemap\\\"\\n"
   "type: COLLISION_OBJECT_TYPE_STATIC\\n"
   "mass: 0.0\\n"
   "friction: 0.1\\n"
@@ -127,7 +287,7 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: 240.0
+    x: 300.0
     y: 180.0
     z: 0.0
   }
@@ -183,13 +343,15 @@ embedded_instances {
   "pivot: PIVOT_CENTER\\n"
   "blend_mode: BLEND_MODE_ALPHA\\n"
   "line_break: false\\n"
-  "text: \\\"Use arrows or WSAD to move around by throwing your body parts\\\"\\n"
+  "text: \\\"It\\\\\\\'s better to restart level, than die and start over\\\\n"
+  "\\\"\\n"
+  "  \\\"\\\"\\n"
   "font: \\\"/builtins/fonts/system_font.font\\\"\\n"
   "material: \\\"/builtins/fonts/label.material\\\"\\n"
   "\"\n"
   "  position {\n"
-  "    x: 483.0\n"
-  "    y: 128.0\n"
+  "    x: 477.0\n"
+  "    y: 127.0\n"
   "    z: 0.0\n"
   "  }\n"
   "  rotation {\n"
@@ -203,7 +365,7 @@ embedded_instances {
   "  id: \"txt1\"\n"
   "  type: \"label\"\n"
   "  data: \"size {\\n"
-  "  x: 128.0\\n"
+  "  x: 200.0\\n"
   "  y: 32.0\\n"
   "  z: 0.0\\n"
   "  w: 0.0\\n"
@@ -237,121 +399,13 @@ embedded_instances {
   "pivot: PIVOT_CENTER\\n"
   "blend_mode: BLEND_MODE_ALPHA\\n"
   "line_break: true\\n"
-  "text: \\\"<- You are a body of elements\\\"\\n"
+  "text: \\\"Sacrifice your live elements to green body, so it can grow bigger\\\"\\n"
   "font: \\\"/builtins/fonts/system_font.font\\\"\\n"
   "material: \\\"/builtins/fonts/label.material\\\"\\n"
   "\"\n"
   "  position {\n"
-  "    x: 395.0\n"
-  "    y: 326.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"txt2\"\n"
-  "  type: \"label\"\n"
-  "  data: \"size {\\n"
-  "  x: 128.0\\n"
-  "  y: 32.0\\n"
-  "  z: 0.0\\n"
-  "  w: 0.0\\n"
-  "}\\n"
-  "scale {\\n"
-  "  x: 1.0\\n"
-  "  y: 1.0\\n"
-  "  z: 1.0\\n"
-  "  w: 0.0\\n"
-  "}\\n"
-  "color {\\n"
-  "  x: 1.0\\n"
-  "  y: 1.0\\n"
-  "  z: 1.0\\n"
-  "  w: 1.0\\n"
-  "}\\n"
-  "outline {\\n"
-  "  x: 0.0\\n"
-  "  y: 0.0\\n"
-  "  z: 0.0\\n"
-  "  w: 1.0\\n"
-  "}\\n"
-  "shadow {\\n"
-  "  x: 0.0\\n"
-  "  y: 0.0\\n"
-  "  z: 0.0\\n"
-  "  w: 1.0\\n"
-  "}\\n"
-  "leading: 1.0\\n"
-  "tracking: 0.0\\n"
-  "pivot: PIVOT_CENTER\\n"
-  "blend_mode: BLEND_MODE_ALPHA\\n"
-  "line_break: false\\n"
-  "text: \\\"<- Reach the teleport\\\"\\n"
-  "font: \\\"/builtins/fonts/system_font.font\\\"\\n"
-  "material: \\\"/builtins/fonts/label.material\\\"\\n"
-  "\"\n"
-  "  position {\n"
-  "    x: 591.0\n"
-  "    y: 450.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"txt3\"\n"
-  "  type: \"label\"\n"
-  "  data: \"size {\\n"
-  "  x: 128.0\\n"
-  "  y: 32.0\\n"
-  "  z: 0.0\\n"
-  "  w: 0.0\\n"
-  "}\\n"
-  "scale {\\n"
-  "  x: 1.0\\n"
-  "  y: 1.0\\n"
-  "  z: 1.0\\n"
-  "  w: 0.0\\n"
-  "}\\n"
-  "color {\\n"
-  "  x: 1.0\\n"
-  "  y: 1.0\\n"
-  "  z: 1.0\\n"
-  "  w: 1.0\\n"
-  "}\\n"
-  "outline {\\n"
-  "  x: 0.0\\n"
-  "  y: 0.0\\n"
-  "  z: 0.0\\n"
-  "  w: 1.0\\n"
-  "}\\n"
-  "shadow {\\n"
-  "  x: 0.0\\n"
-  "  y: 0.0\\n"
-  "  z: 0.0\\n"
-  "  w: 1.0\\n"
-  "}\\n"
-  "leading: 1.0\\n"
-  "tracking: 0.0\\n"
-  "pivot: PIVOT_CENTER\\n"
-  "blend_mode: BLEND_MODE_ALPHA\\n"
-  "line_break: false\\n"
-  "text: \\\"Use [R] key to restart\\\"\\n"
-  "font: \\\"/builtins/fonts/system_font.font\\\"\\n"
-  "material: \\\"/builtins/fonts/label.material\\\"\\n"
-  "\"\n"
-  "  position {\n"
-  "    x: 483.0\n"
-  "    y: 94.0\n"
+  "    x: 193.0\n"
+  "    y: 351.0\n"
   "    z: 0.0\n"
   "  }\n"
   "  rotation {\n"
@@ -364,7 +418,7 @@ embedded_instances {
   ""
   position {
     x: 0.0
-    y: 0.0
+    y: 21.0
     z: 0.0
   }
   rotation {

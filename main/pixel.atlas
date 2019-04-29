@@ -1,5 +1,5 @@
 images {
-  image: "/main/pixel.png"
+  image: "/main/pixel1.png"
 }
 margin: 0
 extrude_borders: 0

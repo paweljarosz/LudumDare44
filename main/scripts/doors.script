@@ -1,0 +1,19 @@
+go.property("color", hash("NONE"))
+
+function init(self)
+	local color = COLOR[self.color]
+	color.x = color.x + 0.2
+	color.y = color.y + 0.2
+	color.z = color.z + 0.2
+	color.w = 0.7
+	sprite.set_constant("#sprite", "tint", color)
+end
+
+local ACTIVATE = hash("activate")
+
+function on_message(self, message_id, message, sender)
+	if message_id == ACTIVATE then
+		print("ACTIVATED",mmessage_id)
+		go.delete()
+	end
+end

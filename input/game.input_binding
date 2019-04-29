@@ -16,11 +16,11 @@ key_trigger {
 }
 key_trigger {
   input: KEY_B
-  action: "GREEN"
+  action: "BLUE"
 }
 key_trigger {
   input: KEY_N
-  action: "BLUE"
+  action: "GREEN"
 }
 key_trigger {
   input: KEY_A
@@ -45,6 +45,10 @@ key_trigger {
 key_trigger {
   input: KEY_M
   action: "YELLOW"
+}
+key_trigger {
+  input: KEY_R
+  action: "RESTART"
 }
 mouse_trigger {
   input: MOUSE_BUTTON_1

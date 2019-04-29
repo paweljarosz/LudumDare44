@@ -15,7 +15,7 @@ emitters {
     w: 1.0
   }
   tile_source: "/main/pixel.atlas"
-  animation: "pixel"
+  animation: "pixel1"
   material: "/builtins/materials/particlefx.material"
   blend_mode: BLEND_MODE_ADD
   particle_orientation: PARTICLE_ORIENTATION_DEFAULT

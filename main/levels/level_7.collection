@@ -1,0 +1,318 @@
+name: "level_7"
+instances {
+  id: "hero"
+  prototype: "/main/objects/hero.go"
+  children: "boost"
+  position {
+    x: 562.0
+    y: 129.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "boost"
+  prototype: "/main/objects/boost.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "walls"
+  prototype: "/main/objects/walls.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "checkpoint"
+  prototype: "/main/objects/checkpoint.go"
+  position {
+    x: 627.0
+    y: 323.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 20.0
+    y: 20.0
+    z: 1.0
+  }
+}
+instances {
+  id: "object"
+  prototype: "/main/objects/object.go"
+  position {
+    x: 480.0
+    y: 265.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "object"
+    properties {
+      id: "state"
+      value: "BLUE"
+      type: PROPERTY_TYPE_HASH
+    }
+    properties {
+      id: "scale"
+      value: "20.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "object1"
+  prototype: "/main/objects/object.go"
+  position {
+    x: 510.0
+    y: 265.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "object"
+    properties {
+      id: "state"
+      value: "BLUE"
+      type: PROPERTY_TYPE_HASH
+    }
+    properties {
+      id: "scale"
+      value: "20.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "object2"
+  prototype: "/main/objects/object.go"
+  position {
+    x: 452.0
+    y: 265.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "object"
+    properties {
+      id: "state"
+      value: "BLUE"
+      type: PROPERTY_TYPE_HASH
+    }
+    properties {
+      id: "scale"
+      value: "20.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "tilemap"
+  data: "components {\n"
+  "  id: \"level_1\"\n"
+  "  component: \"/main/levels/level_1.tilemap\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/main/levels/level_1.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"walls\\\"\\n"
+  "mask: \\\"hero\\\"\\n"
+  "mask: \\\"object\\\"\\n"
+  "linear_damping: 0.0\\n"
+  "angular_damping: 0.0\\n"
+  "locked_rotation: false\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 240.0
+    y: 180.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "info"
+  data: "embedded_components {\n"
+  "  id: \"txt2\"\n"
+  "  type: \"label\"\n"
+  "  data: \"size {\\n"
+  "  x: 128.0\\n"
+  "  y: 32.0\\n"
+  "  z: 0.0\\n"
+  "  w: 0.0\\n"
+  "}\\n"
+  "scale {\\n"
+  "  x: 1.0\\n"
+  "  y: 1.0\\n"
+  "  z: 1.0\\n"
+  "  w: 0.0\\n"
+  "}\\n"
+  "color {\\n"
+  "  x: 1.0\\n"
+  "  y: 1.0\\n"
+  "  z: 1.0\\n"
+  "  w: 1.0\\n"
+  "}\\n"
+  "outline {\\n"
+  "  x: 0.0\\n"
+  "  y: 0.0\\n"
+  "  z: 0.0\\n"
+  "  w: 1.0\\n"
+  "}\\n"
+  "shadow {\\n"
+  "  x: 0.0\\n"
+  "  y: 0.0\\n"
+  "  z: 0.0\\n"
+  "  w: 1.0\\n"
+  "}\\n"
+  "leading: 1.0\\n"
+  "tracking: 0.0\\n"
+  "pivot: PIVOT_CENTER\\n"
+  "blend_mode: BLEND_MODE_ALPHA\\n"
+  "line_break: true\\n"
+  "text: \\\"Be patient\\\"\\n"
+  "font: \\\"/builtins/fonts/system_font.font\\\"\\n"
+  "material: \\\"/builtins/fonts/label.material\\\"\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 343.0\n"
+  "    y: 151.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}

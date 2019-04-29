@@ -1,11 +1,11 @@
-name: "level_1"
+name: "level_12"
 instances {
   id: "hero"
   prototype: "/main/objects/hero.go"
   children: "boost"
   position {
-    x: 309.0
-    y: 342.0
+    x: 480.0
+    y: 221.0
     z: 0.0
   }
   rotation {
@@ -64,7 +64,7 @@ instances {
   id: "checkpoint"
   prototype: "/main/objects/checkpoint.go"
   position {
-    x: 465.0
+    x: 480.0
     y: 444.0
     z: 0.0
   }
@@ -81,68 +81,6 @@ instances {
   }
 }
 scale_along_z: 0
-embedded_instances {
-  id: "tilemap"
-  data: "components {\n"
-  "  id: \"level_1\"\n"
-  "  component: \"/main/levels/level_1.tilemap\"\n"
-  "  position {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"collisionobject\"\n"
-  "  type: \"collisionobject\"\n"
-  "  data: \"collision_shape: \\\"/main/levels/level_1.tilemap\\\"\\n"
-  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
-  "mass: 0.0\\n"
-  "friction: 0.1\\n"
-  "restitution: 0.5\\n"
-  "group: \\\"walls\\\"\\n"
-  "mask: \\\"hero\\\"\\n"
-  "mask: \\\"object\\\"\\n"
-  "linear_damping: 0.0\\n"
-  "angular_damping: 0.0\\n"
-  "locked_rotation: false\\n"
-  "\"\n"
-  "  position {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "}\n"
-  ""
-  position {
-    x: 240.0
-    y: 180.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
 embedded_instances {
   id: "info"
   data: "embedded_components {\n"
@@ -183,13 +121,13 @@ embedded_instances {
   "pivot: PIVOT_CENTER\\n"
   "blend_mode: BLEND_MODE_ALPHA\\n"
   "line_break: false\\n"
-  "text: \\\"Use arrows or WSAD to move around by throwing your body parts\\\"\\n"
+  "text: \\\"If you want more puzzles and elements combinations, please leave a feedback and don\\\\\\\'t forget to rate! :)\\\"\\n"
   "font: \\\"/builtins/fonts/system_font.font\\\"\\n"
   "material: \\\"/builtins/fonts/label.material\\\"\\n"
   "\"\n"
   "  position {\n"
-  "    x: 483.0\n"
-  "    y: 128.0\n"
+  "    x: 477.0\n"
+  "    y: 34.0\n"
   "    z: 0.0\n"
   "  }\n"
   "  rotation {\n"
@@ -209,8 +147,8 @@ embedded_instances {
   "  w: 0.0\\n"
   "}\\n"
   "scale {\\n"
-  "  x: 1.0\\n"
-  "  y: 1.0\\n"
+  "  x: 0.8\\n"
+  "  y: 0.8\\n"
   "  z: 1.0\\n"
   "  w: 0.0\\n"
   "}\\n"
@@ -236,14 +174,14 @@ embedded_instances {
   "tracking: 0.0\\n"
   "pivot: PIVOT_CENTER\\n"
   "blend_mode: BLEND_MODE_ALPHA\\n"
-  "line_break: true\\n"
-  "text: \\\"<- You are a body of elements\\\"\\n"
-  "font: \\\"/builtins/fonts/system_font.font\\\"\\n"
+  "line_break: false\\n"
+  "text: \\\"Thanks for the game!\\\"\\n"
+  "font: \\\"/main/logo_font.font\\\"\\n"
   "material: \\\"/builtins/fonts/label.material\\\"\\n"
   "\"\n"
   "  position {\n"
-  "    x: 395.0\n"
-  "    y: 326.0\n"
+  "    x: 477.0\n"
+  "    y: 76.0\n"
   "    z: 0.0\n"
   "  }\n"
   "  rotation {\n"
@@ -291,67 +229,13 @@ embedded_instances {
   "pivot: PIVOT_CENTER\\n"
   "blend_mode: BLEND_MODE_ALPHA\\n"
   "line_break: false\\n"
-  "text: \\\"<- Reach the teleport\\\"\\n"
+  "text: \\\"Lifeless Space by Pawel Jarosz\\\"\\n"
   "font: \\\"/builtins/fonts/system_font.font\\\"\\n"
   "material: \\\"/builtins/fonts/label.material\\\"\\n"
   "\"\n"
   "  position {\n"
-  "    x: 591.0\n"
-  "    y: 450.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"txt3\"\n"
-  "  type: \"label\"\n"
-  "  data: \"size {\\n"
-  "  x: 128.0\\n"
-  "  y: 32.0\\n"
-  "  z: 0.0\\n"
-  "  w: 0.0\\n"
-  "}\\n"
-  "scale {\\n"
-  "  x: 1.0\\n"
-  "  y: 1.0\\n"
-  "  z: 1.0\\n"
-  "  w: 0.0\\n"
-  "}\\n"
-  "color {\\n"
-  "  x: 1.0\\n"
-  "  y: 1.0\\n"
-  "  z: 1.0\\n"
-  "  w: 1.0\\n"
-  "}\\n"
-  "outline {\\n"
-  "  x: 0.0\\n"
-  "  y: 0.0\\n"
-  "  z: 0.0\\n"
-  "  w: 1.0\\n"
-  "}\\n"
-  "shadow {\\n"
-  "  x: 0.0\\n"
-  "  y: 0.0\\n"
-  "  z: 0.0\\n"
-  "  w: 1.0\\n"
-  "}\\n"
-  "leading: 1.0\\n"
-  "tracking: 0.0\\n"
-  "pivot: PIVOT_CENTER\\n"
-  "blend_mode: BLEND_MODE_ALPHA\\n"
-  "line_break: false\\n"
-  "text: \\\"Use [R] key to restart\\\"\\n"
-  "font: \\\"/builtins/fonts/system_font.font\\\"\\n"
-  "material: \\\"/builtins/fonts/label.material\\\"\\n"
-  "\"\n"
-  "  position {\n"
-  "    x: 483.0\n"
-  "    y: 94.0\n"
+  "    x: 477.0\n"
+  "    y: 4.0\n"
   "    z: 0.0\n"
   "  }\n"
   "  rotation {\n"
@@ -364,7 +248,7 @@ embedded_instances {
   ""
   position {
     x: 0.0
-    y: 0.0
+    y: 70.0
     z: 0.0
   }
   rotation {

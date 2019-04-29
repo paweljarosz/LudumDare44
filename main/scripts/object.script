@@ -1,24 +1,8 @@
-go.property("r", 0)
-go.property("g", 0)
-go.property("b", 0)
-
 go.property("state", hash("NONE"))
-go.property("velocity_x", 0)
-go.property("velocity_y", 0)
-
-go.property("burning", false)	--fire
-go.property("frozen", false)	--ice
-go.property("wet", false)		--water
-go.property("shocked", false)	--electricity
+go.property("scale", 20)
 
 local take_this = hash("take_this")
 local lock_a_sec = false
-
-
-local function move(x, y)
-	msg.post("#dynamic", "apply_force", 
-	{ force = vmath.vector3(x,y,0), position = go.get_world_position()})
-end
 
 local function set_static(static)
 	msg.post("#static", static and "enable" or "disable")
@@ -37,11 +21,19 @@ local function play(el)
 
 end
 
-
 function init(self)
-	--self.initialized = false
+	self.eaten = false
+	go.set_scale(vmath.vector3(self.scale))
 	sprite.set_constant("#sprite", "tint", COLOR[self.state])
 	play(self.state)
+
+	if self.state == YELLOW then 
+		msg.post("#static", "disable")
+		msg.post("#dynamic", "enable")
+	else
+		msg.post("#static", "enable")
+		msg.post("#dynamic", "disable")
+	end
 end
 
 function on_message(self, message_id, message, sender)
@@ -80,13 +72,13 @@ function on_message(self, message_id, message, sender)
 		
 		play(self.state)
 
-		if self.state == RED then		-- on contact with RED hero	(so RED is consuming, draining life)
+		if self.state == RED and not self.eaten then		-- on contact with RED hero	(so RED is consuming, draining life)
+			self.eaten = true
 			msg.post(sender, "eat_this", { amount = go.get_scale().x })	-- pass own elements to hero
 			print(go.get_id(), "I WILL BURN FOR:", go.get_scale().x/4)
-			go.animate(".", "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(0), go.EASING_INOUTSINE, go.get_scale().x/4, 0, function()	-- scale down
-				instances = instances - 1		-- when scaled down to zero disappear
-				if instances <= 0 then 		print("NO MORE OBJECTS")		end
-				go.delete()
+			go.animate(".", "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(0), go.EASING_INOUTSINE, go.get_scale().x/4, 0, function()
+				msg.post("#static", "disable")
+				msg.post("#dynamic", "disable")
 			end)
 		elseif self.state == GREEN then
 			print(go.get_id(), "I WILL RISE FOR:", go.get_scale().x/4)

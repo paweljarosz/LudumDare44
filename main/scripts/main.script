@@ -1,15 +1,23 @@
-local num_of_levels = 1
+local num_of_levels = 12
 local load_level = hash("load_level")
 local proxy_loaded = hash("proxy_loaded")
+local ids = nil
 
 --global:
 LVL = {}
+MAIN = nil
+
+LEVEL = 0
 
 function init(self)
-	for i = 1,num_of_levels do
-		LVL[i] = hash("#level_"..i)
+	self.initialized = false
+	for i = 0,num_of_levels do
+		LVL[i] = "#level_"..i
 	end
-	msg.post("#", load_level, { lvl = 1 })
+	timer.delay(0.1, false, function() 	msg.post("#", load_level, { lvl = LEVEL }) end)
+	MAIN = msg.url()
+
+	--msg.post("@system:", "toggle_physics_debug")
 end
 
 function final(self)
@@ -24,7 +32,14 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == load_level then
-		msg.post(LVL[message.lvl], "load")
+		if ids then go.delete_all(ids) end
+		msg.post(FADER, "end")
+		timer.delay(self.initialized and 1.5 or 0, false, function()
+			print("LOADING LEVEL", LVL[message.lvl])
+			msg.post(FADER, "start")
+			ids = collectionfactory.create(LVL[message.lvl])
+		end)
+		if not self.initialized then self.initialized = true end
 	elseif message_id == proxy_loaded then
 		msg.post(sender, "init")
 		msg.post(sender, "enable")

@@ -27,6 +27,11 @@ components {
     z: 0.0
     w: 1.0
   }
+  properties {
+    id: "fxs"
+    value: "4.0"
+    type: PROPERTY_TYPE_NUMBER
+  }
 }
 components {
   id: "fx1"

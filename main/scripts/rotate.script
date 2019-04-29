@@ -1,0 +1,4 @@
+function init(self)
+	go.animate(".", "rotation", go.PLAYBACK_LOOP_FORWARD,
+	vmath.quat_rotation_z(math.rad(360)), go.EASING_LINEAR, 3)
+end
