@@ -1,0 +1,42 @@
+local num_of_levels = 1
+local load_level = hash("load_level")
+local proxy_loaded = hash("proxy_loaded")
+
+--global:
+LVL = {}
+
+function init(self)
+	for i = 1,num_of_levels do
+		LVL[i] = hash("#level_"..i)
+	end
+	msg.post("#", load_level, { lvl = 1 })
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == load_level then
+		msg.post(LVL[message.lvl], "load")
+	elseif message_id == proxy_loaded then
+		msg.post(sender, "init")
+		msg.post(sender, "enable")
+	end
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here
+	-- Remove this function if not needed
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Remove this function if not needed
+end

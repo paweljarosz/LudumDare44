@@ -1,0 +1,16 @@
+go.property("r", 0)
+go.property("g", 0)
+go.property("b", 0)
+
+function init(self)
+	for i = 1,4 do 
+		particlefx.play("#fx"..i)
+		go.animate("#", "r", go.PLAYBACK_LOOP_PINGPONG, 1, go.EASING_INOUTSINE, 15)
+		go.animate("#", "g", go.PLAYBACK_LOOP_PINGPONG, 1, go.EASING_INOUTSINE, 24)
+		go.animate("#", "b", go.PLAYBACK_LOOP_PINGPONG, 1, go.EASING_INOUTSINE, 33)
+
+		timer.delay(0.01, true, function()
+			particlefx.set_constant("#fx"..i, "emitter", "tint", vmath.vector4(self.r, self.g, self.b, 1))
+		end)
+	end
+end

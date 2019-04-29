@@ -1,0 +1,123 @@
+go.property("r", 0)
+go.property("g", 0)
+go.property("b", 0)
+
+go.property("state", hash("NONE"))
+go.property("velocity_x", 0)
+go.property("velocity_y", 0)
+
+go.property("burning", false)	--fire
+go.property("frozen", false)	--ice
+go.property("wet", false)		--water
+go.property("shocked", false)	--electricity
+
+local take_this = hash("take_this")
+local lock_a_sec = false
+
+
+local function move(x, y)
+	msg.post("#dynamic", "apply_force", 
+	{ force = vmath.vector3(x,y,0), position = go.get_world_position()})
+end
+
+local function set_static(static)
+	msg.post("#static", static and "enable" or "disable")
+	msg.post("#dynamic", static and "disable" or "enable")
+end
+
+local function play(el)
+	local color = COLOR[el]
+	if el == NONE then
+		particlefx.stop("#fx")
+		sprite.set_constant("#sprite", "tint", color)
+	else
+		particlefx.play("#fx")	particlefx.set_constant("#fx", "emitter", "tint", color)
+		sprite.set_constant("#sprite", "tint", color)
+	end
+
+end
+
+
+function init(self)
+	--self.initialized = false
+	sprite.set_constant("#sprite", "tint", COLOR[self.state])
+	play(self.state)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == take_this and not lock_a_sec then
+		lock_a_sec = true
+		timer.delay(0.3, false, function() lock_a_sec = false end)
+
+
+		print("STAT", self.state, message.color)
+
+		-- COMBINE BEFORE CHANGING STATE
+		if 		self.state == RED and message.color == RED 		then self.state = RED
+		elseif	self.state == RED and message.color == BLUE 	then self.state = NONE
+		elseif	self.state == RED and message.color == YELLOW 	then self.state = YELLOW
+		elseif	self.state == RED and message.color == GREEN  	then self.state = NONE
+
+		elseif	self.state == GREEN and message.color == RED 	then self.state = NONE
+		elseif	self.state == GREEN and message.color == BLUE   then self.state = BLUE
+		elseif	self.state == GREEN and message.color == YELLOW then self.state = YELLOW
+		elseif	self.state == GREEN and message.color == GREEN  then self.state = GREEN
+
+		elseif	self.state == BLUE and message.color == RED 	then self.state = NONE
+		elseif	self.state == BLUE and message.color == BLUE    then self.state = BLUE
+		elseif	self.state == BLUE and message.color == YELLOW  then self.state = YELLOW
+		elseif	self.state == BLUE and message.color == GREEN   then self.state = GREEN
+
+		elseif	self.state == YELLOW and message.color == RED 	 then self.state = RED
+		elseif	self.state == YELLOW and message.color == BLUE   then self.state = BLUE
+		elseif	self.state == YELLOW and message.color == YELLOW then self.state = YELLOW
+		elseif	self.state == YELLOW and message.color == GREEN  then self.state = GREEN
+
+		elseif self.state == NONE then self.state = message.color
+		end
+
+		print("THEN", self.state)
+		
+		play(self.state)
+
+		if self.state == RED then		-- on contact with RED hero	(so RED is consuming, draining life)
+			msg.post(sender, "eat_this", { amount = go.get_scale().x })	-- pass own elements to hero
+			print(go.get_id(), "I WILL BURN FOR:", go.get_scale().x/4)
+			go.animate(".", "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(0), go.EASING_INOUTSINE, go.get_scale().x/4, 0, function()	-- scale down
+				instances = instances - 1		-- when scaled down to zero disappear
+				if instances <= 0 then 		print("NO MORE OBJECTS")		end
+				go.delete()
+			end)
+		elseif self.state == GREEN then
+			print(go.get_id(), "I WILL RISE FOR:", go.get_scale().x/4)
+			go.animate(".", "scale", go.PLAYBACK_ONCE_FORWARD, go.get_scale()*2, go.EASING_INOUTSINE, go.get_scale().x/4)
+			print(go.get_id(), "I WILL BE GROWING")
+		elseif self.state == BLUE then
+			print(go.get_id(), "I WON'T BE MOVING")
+			set_static(true)
+			go.cancel_animations(".", "scale")
+		elseif self.state == YELLOW then
+			print(go.get_id(), "I WILL BE MOVING")
+			set_static(false)
+			go.cancel_animations(".", "scale")
+		end
+		--instances = instances - 1
+			--print("COLLIDED SUCCESFULLY", go.get_scale().x)
+
+	elseif message_id == COLLISION and message.other_group == hash("object") and message.other_id ~= go.get_id() then
+		msg.post(msg.url(message.other_id), "take_this", { color = self.state })
+
+			--set_static(false)
+		--print("SELF COLLISION", message.other_group, message.other_id)
+	end
+end
+
+function on_input(self, action_id, action)
+end
+
+function on_reload(self)
+end
+
+
+function final(self)
+end

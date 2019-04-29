@@ -1,0 +1,23 @@
+[bootstrap]
+main_collection = /main/main.collectionc
+
+[script]
+shared_state = 1
+
+[display]
+width = 960
+height = 640
+
+[project]
+title = LudumDare44
+
+[physics]
+gravity_y = 0.0
+
+[particle_fx]
+max_particle_count = 4096
+max_count = 256
+
+[sprite]
+max_count = 1024
+

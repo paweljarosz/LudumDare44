@@ -1,0 +1,28 @@
+local color = hash("color")
+local start = hash("go")
+local stop = hash("stop")
+local my_scale = 1
+
+boost_url = nil
+
+function init()
+	boost_url = msg.url(go.get_id())
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == color then
+		particlefx.set_constant("#fx", "emitter", "tint", message.color)
+	elseif message_id == start	then
+		particlefx.play("#fx")
+	elseif message_id == stop	then
+		particlefx.stop("#fx")
+	end
+end
+
+function update(self, dt)
+	if my_scale ~= scale then
+		local duration = my_scale - scale
+		my_scale = 1/scale
+		go.animate(boost_url, "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(my_scale), go.EASING_LINEAR, duration*2)
+	end
+end

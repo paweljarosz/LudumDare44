@@ -1,0 +1,32 @@
+local width = 960
+local height = 640
+local boundary = 100
+
+instances = 0
+
+local function random_state()
+	local state
+	local random_no = math.random()
+	if random_no < 0.25 then	 state = RED
+	elseif random_no < 0.5 then  state = GREEN
+	elseif random_no < 0.75 then state = BLUE
+	elseif random_no <= 1 then 	 state = YELLOW
+	end
+
+	return state
+end
+
+function init(self)
+	math.randomseed(os.time())
+	
+	for i = 1,10 do 
+		local pos = go.get_world_position()
+		pos.x = (width - 2*boundary) * math.random()	+ boundary
+		pos.y = (height- 2*boundary) * math.random()	+ boundary
+		local rot = vmath.quat_rotation_z(math.rad(math.random()*360))
+		local prop = { state = random_state() }
+		local scale = vmath.vector3(math.random() * 10 + 30)
+		factory.create("#objects", pos, rot, prop, scale)
+	end
+	instances = 10
+end

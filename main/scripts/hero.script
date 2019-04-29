@@ -1,0 +1,126 @@
+local UP = hash("UP")
+local DOWN = hash("DOWN")
+local LEFT = hash("LEFT")
+local RIGHT = hash("RIGHT")
+
+local speed = 20000
+local color = nil
+local des_scale = 1
+local drain_value = 0.005
+
+--GLOBAL:
+scale = 1
+
+RED = hash("RED")
+GREEN = hash("GREEN")
+BLUE = hash("BLUE")
+YELLOW = hash("YELLOW")
+NONE = hash("NONE")
+INVISIBLE = hash("invis")
+
+COLOR = {}
+COLOR[RED]    = vmath.vector4(1,0.2,0,1)
+COLOR[GREEN]  = vmath.vector4(0.3,1,0.5,1)
+COLOR[BLUE]   = vmath.vector4(0.2,0.4,1,1)
+COLOR[YELLOW] = vmath.vector4(1,1, 0.2,1)
+COLOR[NONE]	  = vmath.vector4(1)
+COLOR[INVISIBLE] = vmath.vector4(0)
+
+COLLISION = hash("collision_response")
+local EAT_THIS = hash("eat_this")
+
+local function move(x, y)
+	msg.post("#collisionobject", "apply_force", 
+	{ force = vmath.vector3(x,y,0), position = go.get_world_position()})
+end
+
+local function hero_color(a_color, emmiters)
+	print("EMI",emmiters)
+	if emmiters < 4 then 
+		particlefx.set_constant("#trail", "emitter", "tint", COLOR[a_color])
+		particlefx.set_constant("#trail", "emitter1", "tint", COLOR[INVISIBLE])
+		particlefx.set_constant("#trail", "emitter2", "tint", COLOR[INVISIBLE])
+	elseif emmiters < 8 then
+		particlefx.set_constant("#trail", "emitter", "tint", COLOR[a_color])
+		particlefx.set_constant("#trail", "emitter1", "tint", COLOR[a_color])
+		particlefx.set_constant("#trail", "emitter2", "tint", COLOR[INVISIBLE])
+	elseif emmiters < 12 then
+		particlefx.set_constant("#trail", "emitter", "tint", COLOR[a_color])
+		particlefx.set_constant("#trail", "emitter1", "tint", COLOR[a_color])
+		particlefx.set_constant("#trail", "emitter2", "tint", COLOR[a_color])
+	end
+		
+end
+
+local function boost_move(play)
+	if 		play == true	then
+		msg.post(boost_url, "go")
+		msg.post(boost_url, "color", { color = COLOR[color]})
+		hero_color(color, scale%10)
+	elseif 	play == false	then msg.post(boost_url, "stop")
+	end
+end
+
+local function rotate(angle)
+	angle = vmath.quat_rotation_z(math.rad(angle))
+	go.set_rotation(angle, boost_url)
+end
+
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	color = RED
+	scale = 15
+	des_scale = scale - drain_value
+	particlefx.play("#trail")
+	hero_color(color, scale%10)
+	print("INIT")
+end
+
+function update(self, dt)
+	if des_scale ~= scale then
+		local duration = des_scale - scale
+		scale = des_scale
+		if scale > 2 then
+
+		end
+		go.animate(".", "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(scale), go.EASING_LINEAR, duration*20)
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == COLLISION then
+		msg.post(msg.url(message.other_id), "take_this", { color = color })
+	elseif message_id == EAT_THIS then
+		print("AMOUNT", message.amount/30)
+		scale = scale + message.amount/30	-- bump up the scale
+		des_scale = scale
+		go.set_scale(scale)
+	end
+end
+
+function on_input(self, action_id, action)
+
+	if action_id == UP then			move(0,speed)	rotate(180)
+	elseif action_id == DOWN then	move(0,-speed)	rotate(0)
+	elseif action_id == LEFT then	move(-speed,0)	rotate(270)
+	elseif action_id == RIGHT then	move(speed,0)	rotate(90)
+	end
+	
+	if action_id == UP or action_id == DOWN or action_id == LEFT or action_id == RIGHT then
+		if action.pressed then		boost_move(true)
+		elseif action.released then boost_move(false)
+		end
+		des_scale = scale - drain_value
+		if des_scale < 0 then
+			print("GAME_OVER")
+		end
+	elseif action_id == RED or action_id == GREEN  or action_id == BLUE  or action_id == YELLOW then
+		color = action_id
+		hero_color(color, scale%10)
+	end
+end
+
+function final(self)
+	msg.post(".", "release_input_focus")
+end
